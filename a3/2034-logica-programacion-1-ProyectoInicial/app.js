@@ -1,16 +1,17 @@
 /*Variables*/
-let numeroSecreto = 6;
+let numeroMaximoPosible = prompt("Inserte el limite maximo del juego: ")
+let numeroSecreto = Math.floor(Math.random()*numeroMaximoPosible)+1;
 let numeroUsuario = 0;
-let contadorIntentos = 0;
+let contadorIntentos = 1;
+let maximoIntentos=10;
 while(numeroUsuario!=numeroSecreto){
-    numeroUsuario = prompt("Inserte un número del 1 al 10");
-    console.log(numeroUsuario);
+    numeroUsuario = parseInt(prompt(`Inserte un número del 1 al ${numeroMaximoPosible}`));
+    console.log(typeof(numeroUsuario));
     //Código para compilar
-    contadorIntentos=contadorIntentos+1;
     if(numeroSecreto==numeroUsuario){
         //En caso acertemos el número
-        alert(`¡Acertaste!, el número secreto es ${numeroSecreto}`);
-        break;
+        alert(`¡Acertaste!, el número secreto es ${numeroSecreto} `);
+        alert(`Acertaste en: ${contadorIntentos} ${contadorIntentos == 1 ? 'vez' : 'veces'}`)
     } else {
         if(numeroUsuario>numeroSecreto){
             alert("El número secreto es menor");
@@ -18,7 +19,12 @@ while(numeroUsuario!=numeroSecreto){
             alert("El número secreto es mayor");
         }
         //En caso hayamos errado
-        alert("No has acertado el número secreto");
+        contadorIntentos++;
+        alert("Intentalo de nuevo");
+        if(contadorIntentos>maximoIntentos){
+            alert("Perdiste: No tienes más intentos");
+            alert(`El número secreto era ${numeroSecreto} `)
+            break;
+        }
     }
 }
-alert(`Acertaste en: ${contadorIntentos} intentos`)
